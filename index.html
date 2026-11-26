@@ -19,73 +19,477 @@
       --kakao-text: #191919;
       --radius: 16px;
     }
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
-    .wrap { max-width: 520px; margin: 0 auto; min-height: 100vh; background: var(--card); box-shadow: 0 8px 30px rgba(15, 58, 74, 0.08); display: flex; flex-direction: column; }
-    .topbar { background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-teal) 100%); color: #fff; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-    .brand-left { display: flex; align-items: center; gap: 11px; }
-    .brand-logo-wrap { width: 44px; height: 44px; border-radius: 50%; background: #ffffff; padding: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16); overflow: hidden; }
-    .brand-logo-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-    .brand-title { font-size: 16px; font-weight: 800; letter-spacing: -0.3px; }
-    .brand-sub { font-size: 11px; color: #d7eef2; margin-top: 1px; }
-    .secret-badge { background: rgba(255, 255, 255, 0.16); border: 1px solid rgba(255, 255, 255, 0.28); color: #ffffff; font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 999px; white-space: nowrap; }
-    .progress-box { padding: 14px 20px 8px; background: #fff; }
-    .progress-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
-    .progress-track { width: 100%; height: 6px; background: #e6eff1; border-radius: 999px; overflow: hidden; }
-    .progress-fill { height: 100%; width: 20%; background: linear-gradient(90deg, var(--brand-green) 0%, var(--brand-teal) 100%); transition: width 0.28s ease; }
-    .content { padding: 20px; flex: 1; }
-    .step { display: none; animation: fadeIn 0.22s ease; }
-    .step.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-    .step-tag { display: inline-block; font-size: 12px; font-weight: 700; color: var(--brand-teal); background: var(--brand-soft); padding: 4px 10px; border-radius: 6px; margin-bottom: 10px; }
-    h1 { font-size: 21px; line-height: 1.35; margin: 0 0 8px; letter-spacing: -0.4px; color: var(--brand-dark); }
-    .desc { font-size: 13.5px; color: var(--muted); margin: 0 0 18px; }
-    .option-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
-    .option-grid.two-col { grid-template-columns: 1fr 1fr; }
-    .opt-btn { width: 100%; text-align: left; background: #fff; border: 1.5px solid var(--border); border-radius: 12px; padding: 13px 15px; font-size: 14.5px; font-weight: 600; color: var(--text); cursor: pointer; transition: all 0.16s ease; display: flex; align-items: center; justify-content: space-between; }
-    .opt-btn:hover { border-color: var(--brand-teal); background: #f7fbfc; }
-    .opt-btn.selected { border-color: var(--brand-green); background: var(--brand-soft); color: var(--brand-dark); box-shadow: 0 0 0 1px var(--brand-green) inset; }
-    .opt-sub { display: block; font-size: 11.5px; font-weight: 400; color: var(--muted); margin-top: 2px; }
-    .check-dot { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #cbd5e1; flex-shrink: 0; margin-left: 10px; }
-    .opt-btn.selected .check-dot { border-color: var(--brand-green); background: var(--brand-green); }
-    .nav-btns { display: flex; gap: 10px; margin-top: 24px; }
-    .btn-prev { flex: 1; padding: 14px; border-radius: 12px; border: 1px solid var(--border); background: #fff; color: var(--muted); font-size: 14.5px; font-weight: 700; cursor: pointer; }
-    .btn-next { flex: 2; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(135deg, var(--brand-green) 0%, var(--brand-teal) 100%); color: #fff; font-size: 14.5px; font-weight: 700; cursor: pointer; }
-    .btn-next:disabled { background: #cbd5e1; cursor: not-allowed; }
-    .loading-screen { display: none; text-align: center; padding: 46px 16px; }
-    .loading-screen.active { display: block; animation: fadeIn 0.2s ease; }
-    .gif-circle { width: 136px; height: 136px; margin: 0 auto 20px; border-radius: 50%; background: #ffffff; border: 3px solid var(--brand-soft); box-shadow: 0 10px 26px rgba(11, 122, 158, 0.16); overflow: hidden; display: flex; align-items: center; justify-content: center; }
-    .gif-circle img { width: 100%; height: 185%; object-fit: cover; object-position: center; }
-    .loading-title { font-size: 18px; font-weight: 800; color: var(--brand-dark); margin: 0 0 6px; }
-    .loading-sub { font-size: 13.5px; color: var(--muted); margin: 0; }
-    .result-box { background: linear-gradient(145deg, var(--brand-dark) 0%, var(--brand-teal) 100%); color: #fff; border-radius: var(--radius); padding: 20px; margin-bottom: 14px; }
-    .result-badge { display: inline-block; background: rgba(255, 255, 255, 0.16); color: #b8ffec; border: 1px solid rgba(184, 255, 236, 0.35); font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; margin-bottom: 10px; }
-    .result-main-label { font-size: 13px; color: #d7eef2; }
-    .result-main-val { font-size: 27px; font-weight: 800; color: #fff; margin: 4px 0 12px; letter-spacing: -0.5px; }
-    .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 12px; }
-    .r-item-label { font-size: 11px; color: #d7eef2; }
-    .r-item-val { font-size: 14.5px; font-weight: 700; color: #ffe680; margin-top: 2px; }
-    .summary-card { background: #f8fbfb; border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; margin-bottom: 14px; }
-    .summary-title { font-size: 13.5px; font-weight: 800; color: var(--brand-dark); margin-bottom: 8px; }
-    .summary-list { margin: 0; padding: 0; list-style: none; font-size: 13px; color: #334155; }
-    .summary-list li { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dashed #dce5e8; }
-    .summary-list li:last-child { border-bottom: none; }
-    .summary-list span:first-child { color: var(--muted); }
-    .summary-list span:last-child { font-weight: 700; color: var(--text); }
-    .point-box { background: var(--brand-soft); border: 1px solid #bce3da; border-radius: 12px; padding: 13px 15px; font-size: 13px; color: #13463c; margin-bottom: 16px; }
-    .point-box strong { display: block; color: var(--brand-dark); margin-bottom: 4px; }
-    .notice-box { font-size: 11.5px; color: var(--muted); margin-bottom: 18px; line-height: 1.45; }
-    .action-stack { display: flex; flex-direction: column; gap: 10px; }
-    .btn-kakao { display: flex; align-items: center; justify-content: center; width: 100%; padding: 15px; border-radius: 12px; background: var(--kakao); color: var(--kakao-text); font-size: 15px; font-weight: 800; text-decoration: none; border: none; cursor: pointer; }
-    .btn-call { display: flex; align-items: center; justify-content: center; width: 100%; padding: 14px; border-radius: 12px; background: var(--brand-dark); color: #fff; font-size: 15px; font-weight: 700; text-decoration: none; }
-    .footer { padding: 14px 20px 22px; text-align: center; font-size: 12px; color: var(--muted); border-top: 1px solid #e6eff1; }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .wrap {
+      max-width: 520px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: var(--card);
+      box-shadow: 0 8px 30px rgba(15, 58, 74, 0.08);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-teal) 100%);
+      color: #fff;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .brand-logo-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #ffffff;
+      padding: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+      overflow: hidden;
+    }
+
+    .brand-logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: #d7eef2;
+      margin-top: 1px;
+    }
+
+    .secret-badge {
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .progress-box {
+      padding: 14px 20px 8px;
+      background: #fff;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: #e6eff1;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 20%;
+      background: linear-gradient(90deg, var(--brand-green) 0%, var(--brand-teal) 100%);
+      transition: width 0.28s ease;
+    }
+
+    .content {
+      padding: 20px;
+      flex: 1;
+    }
+
+    .step {
+      display: none;
+      animation: fadeIn 0.22s ease;
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--brand-teal);
+      background: var(--brand-soft);
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 21px;
+      line-height: 1.35;
+      margin: 0 0 8px;
+      letter-spacing: -0.4px;
+      color: var(--brand-dark);
+    }
+
+    .desc {
+      font-size: 13.5px;
+      color: var(--muted);
+      margin: 0 0 18px;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .option-grid.two-col {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .opt-btn {
+      width: 100%;
+      text-align: left;
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 13px 15px;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.16s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .opt-btn:hover {
+      border-color: var(--brand-teal);
+      background: #f7fbfc;
+    }
+
+    .opt-btn.selected {
+      border-color: var(--brand-green);
+      background: var(--brand-soft);
+      color: var(--brand-dark);
+      box-shadow: 0 0 0 1px var(--brand-green) inset;
+    }
+
+    .opt-sub {
+      display: block;
+      font-size: 11.5px;
+      font-weight: 400;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .check-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid #cbd5e1;
+      flex-shrink: 0;
+      margin-left: 10px;
+    }
+
+    .opt-btn.selected .check-dot {
+      border-color: var(--brand-green);
+      background: var(--brand-green);
+    }
+
+    .nav-btns {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .btn-prev {
+      flex: 1;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--muted);
+      font-size: 14.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-next {
+      flex: 2;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, var(--brand-green) 0%, var(--brand-teal) 100%);
+      color: #fff;
+      font-size: 14.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-next:disabled {
+      background: #cbd5e1;
+      cursor: not-allowed;
+    }
+
+    .loading-screen {
+      display: none;
+      text-align: center;
+      padding: 46px 16px;
+    }
+
+    .loading-screen.active {
+      display: block;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .gif-circle {
+      width: 136px;
+      height: 136px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 3px solid var(--brand-soft);
+      box-shadow: 0 10px 26px rgba(11, 122, 158, 0.16);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gif-circle img {
+      width: 100%;
+      height: 185%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .loading-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--brand-dark);
+      margin: 0 0 6px;
+    }
+
+    .loading-sub {
+      font-size: 13.5px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .result-box {
+      background: linear-gradient(145deg, var(--brand-dark) 0%, var(--brand-teal) 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 14px;
+    }
+
+    .result-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.16);
+      color: #b8ffec;
+      border: 1px solid rgba(184, 255, 236, 0.35);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+
+    .result-main-label {
+      font-size: 13px;
+      color: #d7eef2;
+    }
+
+    .result-main-val {
+      font-size: 27px;
+      font-weight: 800;
+      color: #fff;
+      margin: 4px 0 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .r-item-label {
+      font-size: 11px;
+      color: #d7eef2;
+    }
+
+    .r-item-val {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #ffe680;
+      margin-top: 2px;
+    }
+
+    .summary-card {
+      background: #f8fbfb;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    .summary-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--brand-dark);
+      margin-bottom: 8px;
+    }
+
+    .summary-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 13px;
+      color: #334155;
+    }
+
+    .summary-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px dashed #dce5e8;
+    }
+
+    .summary-list li:last-child {
+      border-bottom: none;
+    }
+
+    .summary-list span:first-child {
+      color: var(--muted);
+    }
+
+    .summary-list span:last-child {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .point-box {
+      background: var(--brand-soft);
+      border: 1px solid #bce3da;
+      border-radius: 12px;
+      padding: 13px 15px;
+      font-size: 13px;
+      color: #13463c;
+      margin-bottom: 16px;
+    }
+
+    .point-box strong {
+      display: block;
+      color: var(--brand-dark);
+      margin-bottom: 4px;
+    }
+
+    .notice-box {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-bottom: 18px;
+      line-height: 1.45;
+    }
+
+    .action-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-kakao {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      background: var(--kakao);
+      color: var(--kakao-text);
+      font-size: 15px;
+      font-weight: 800;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-call {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--brand-dark);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .footer {
+      padding: 14px 20px 22px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid #e6eff1;
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="topbar">
       <div class="brand-left">
-        <div class="brand-logo-wrap"><img src="./이룸로고.jpg" alt="이룸법률사무소 로고" /></div>
+        <div class="brand-logo-wrap">
+          <img src="./이룸로고.jpg" alt="이룸법률사무소 로고" />
+        </div>
         <div>
           <div class="brand-title">이룸법률사무소</div>
           <div class="brand-sub">개인회생·파산 무료 셀프 시뮬레이션</div>
@@ -93,87 +497,207 @@
       </div>
       <div class="secret-badge">개인정보 입력 없음</div>
     </div>
+
     <div class="progress-box" id="progressWrap">
-      <div class="progress-meta"><span id="stepIndicator">1 / 5 단계</span><span id="stepPercent">20%</span></div>
-      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-meta">
+        <span id="stepIndicator">1 / 5 단계</span>
+        <span id="stepPercent">20%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
     </div>
+
     <div class="content">
       <div class="step active" id="step1">
         <span class="step-tag">1단계 · 채무 규모</span>
         <h1>현재 총 채무액은<br>어느 정도인가요?</h1>
         <p class="desc">대출·신용카드·투자손실·보증 등 전체 원금 합산 기준</p>
         <div class="option-grid" data-key="debt">
-          <button type="button" class="opt-btn" data-val="3000" data-label="3,000만 원 이하"><span>3,000만 원 이하</span><span class="check-dot"></span></button>
-          <button type="button" class="opt-btn" data-val="5000" data-label="3,000만 원 ~ 5,000만 원"><span>3,000만 원 ~ 5,000만 원</span><span class="check-dot"></span></button>
-          <button type="button" class="opt-btn" data-val="8000" data-label="5,000만 원 ~ 1억 원"><span>5,000만 원 ~ 1억 원</span><span class="check-dot"></span></button>
-          <button type="button" class="opt-btn" data-val="15000" data-label="1억 원 ~ 2억 원"><span>1억 원 ~ 2억 원</span><span class="check-dot"></span></button>
-          <button type="button" class="opt-btn" data-val="25000" data-label="2억 원 이상"><span>2억 원 이상</span><span class="check-dot"></span></button>
+          <button type="button" class="opt-btn" data-val="3000" data-label="3,000만 원 이하">
+            <span>3,000만 원 이하</span>
+            <span class="check-dot"></span>
+          </button>
+          <button type="button" class="opt-btn" data-val="5000" data-label="3,000만 원 ~ 5,000만 원">
+            <span>3,000만 원 ~ 5,000만 원</span>
+            <span class="check-dot"></span>
+          </button>
+          <button type="button" class="opt-btn" data-val="8000" data-label="5,000만 원 ~ 1억 원">
+            <span>5,000만 원 ~ 1억 원</span>
+            <span class="check-dot"></span>
+          </button>
+          <button type="button" class="opt-btn" data-val="15000" data-label="1억 원 ~ 2억 원">
+            <span>1억 원 ~ 2억 원</span>
+            <span class="check-dot"></span>
+          </button>
+          <button type="button" class="opt-btn" data-val="25000" data-label="2억 원 이상">
+            <span>2억 원 이상</span>
+            <span class="check-dot"></span>
+          </button>
         </div>
-        <div class="nav-btns"><button type="button" class="btn-next" id="next1" disabled onclick="goStep(2)">다음 단계</button></div>
+        <div class="nav-btns">
+          <button type="button" class="btn-next" id="next1" disabled onclick="goStep(2)">다음 단계</button>
+        </div>
       </div>
+
       <div class="step" id="step2">
         <span class="step-tag">2단계 · 소득 요건</span>
         <h1>세후 월 평균 소득은<br>얼마인가요?</h1>
         <p class="desc">급여, 아르바이트, 프리랜서, 사업소득 등 매월 반복 수입 기준</p>
         <div class="option-grid" data-key="income">
-          <button type="button" class="opt-btn" data-val="0" data-label="무소득 / 불규칙 소액"><span>무소득 / 불규칙 소액</span><span class="check-dot"></span></button>
-          <button type="button" class="opt-btn" data-val="180" data-label="월 150만 원 ~ 200만 원"><span>월 150만 원 ~ 200만 원</span><span class="check-dot"></span></button>
-          <button type="button" class="opt-btn" data-val="250" data-label="월 200만 원 ~ 300만 원"><span>월 200만 원 ~ 300만 원</span><span class="check-dot"></span></button>
-          <button type="button" class="opt-btn" data-val="350" data-label="월 300만 원 ~ 400만 원"><span>월 300만 원 ~ 400만 원</span><span class="check-dot"></span></button>
-          <button type="button" class="opt-btn" data-val="500" data-label="월 400만 원 이상"><span>월 400만 원 이상</span><span class="check-dot"></span></button>
+          <button type="button" class="opt-btn" data-val="0" data-label="무소득 / 불규칙 소액">
+            <span>무소득 / 불규칙 소액</span>
+            <span class="check-dot"></span>
+          </button>
+          <button type="button" class="opt-btn" data-val="180" data-label="월 150만 원 ~ 200만 원">
+            <span>월 150만 원 ~ 200만 원</span>
+            <span class="check-dot"></span>
+          </button>
+          <button type="button" class="opt-btn" data-val="250" data-label="월 200만 원 ~ 300만 원">
+            <span>월 200만 원 ~ 300만 원</span>
+            <span class="check-dot"></span>
+          </button>
+          <button type="button" class="opt-btn" data-val="350" data-label="월 300만 원 ~ 400만 원">
+            <span>월 300만 원 ~ 400만 원</span>
+            <span class="check-dot"></span>
+          </button>
+          <button type="button" class="opt-btn" data-val="500" data-label="월 400만 원 이상">
+            <span>월 400만 원 이상</span>
+            <span class="check-dot"></span>
+          </button>
         </div>
-        <div class="nav-btns"><button type="button" class="btn-prev" onclick="goStep(1)">이전</button><button type="button" class="btn-next" id="next2" disabled onclick="goStep(3)">다음 단계</button></div>
+        <div class="nav-btns">
+          <button type="button" class="btn-prev" onclick="goStep(1)">이전</button>
+          <button type="button" class="btn-next" id="next2" disabled onclick="goStep(3)">다음 단계</button>
+        </div>
       </div>
+
       <div class="step" id="step3">
         <span class="step-tag">3단계 · 생계비 공제</span>
         <h1>부양가족 수는<br>몇 명인가요? (본인 포함)</h1>
         <p class="desc">미성년 자녀·소득 없는 부모님 등 인정 시 월 변제금이 크게 낮아집니다</p>
         <div class="option-grid two-col" data-key="family">
-          <button type="button" class="opt-btn" data-val="1" data-label="1인 가구 (본인)"><span>1인 가구</span><span class="check-dot"></span></button>
-          <button type="button" class="opt-btn" data-val="2" data-label="2인 가구"><span>2인 가구</span><span class="check-dot"></span></button>
-          <button type="button" class="opt-btn" data-val="3" data-label="3인 가구"><span>3인 가구</span><span class="check-dot"></span></button>
-          <button type="button" class="opt-btn" data-val="4" data-label="4인 가구 이상"><span>4인 가구 이상</span><span class="check-dot"></span></button>
+          <button type="button" class="opt-btn" data-val="1" data-label="1인 가구 (본인)">
+            <span>1인 가구</span>
+            <span class="check-dot"></span>
+          </button>
+          <button type="button" class="opt-btn" data-val="2" data-label="2인 가구">
+            <span>2인 가구</span>
+            <span class="check-dot"></span>
+          </button>
+          <button type="button" class="opt-btn" data-val="3" data-label="3인 가구">
+            <span>3인 가구</span>
+            <span class="check-dot"></span>
+          </button>
+          <button type="button" class="opt-btn" data-val="4" data-label="4인 가구 이상">
+            <span>4인 가구 이상</span>
+            <span class="check-dot"></span>
+          </button>
         </div>
-        <div class="nav-btns"><button type="button" class="btn-prev" onclick="goStep(2)">이전</button><button type="button" class="btn-next" id="next3" disabled onclick="goStep(4)">다음 단계</button></div>
+        <div class="nav-btns">
+          <button type="button" class="btn-prev" onclick="goStep(2)">이전</button>
+          <button type="button" class="btn-next" id="next3" disabled onclick="goStep(4)">다음 단계</button>
+        </div>
       </div>
+
       <div class="step" id="step4">
         <span class="step-tag">4단계 · 주거 및 보증금</span>
         <h1>현재 거주 형태는<br>어떻게 되시나요?</h1>
         <p class="desc">자가 지분이나 전세보증금은 '청산가치' 산정에 직접 반영됩니다</p>
         <div class="option-grid" data-key="housing">
-          <button type="button" class="opt-btn" data-val="0" data-label="월세 / 무상거주 (가족 명의 등)"><div><span>월세 / 무상거주 (가족 명의 등)</span><span class="opt-sub">소액보증금 이하 시 재산가치 반영 거의 없음</span></div><span class="check-dot"></span></button>
-          <button type="button" class="opt-btn" data-val="1500" data-label="전세 / 반전세 (보증금 1억 이하)"><div><span>전세 / 반전세 (보증금 1억 이하)</span><span class="opt-sub">지역별 최우선변제금 공제 후 초과분만 반영</span></div><span class="check-dot"></span></button>
-          <button type="button" class="opt-btn" data-val="4500" data-label="고액 전세 (보증금 1억 초과)"><div><span>고액 전세 (보증금 1억 초과)</span><span class="opt-sub">공제 한도 초과 보증금이 청산가치에 합산됨</span></div><span class="check-dot"></span></button>
-          <button type="button" class="opt-btn" data-val="6000" data-label="본인 명의 자가 (아파트·빌라 등)"><div><span>본인 명의 자가 (아파트·빌라 등)</span><span class="opt-sub">시세에서 주택담보대출 잔액을 뺀 순가치 반영</span></div><span class="check-dot"></span></button>
+          <button type="button" class="opt-btn" data-val="0" data-label="월세 / 무상거주 (가족 명의 등)">
+            <div>
+              <span>월세 / 무상거주 (가족 명의 등)</span>
+              <span class="opt-sub">소액보증금 이하 시 재산가치 반영 거의 없음</span>
+            </div>
+            <span class="check-dot"></span>
+          </button>
+          <button type="button" class="opt-btn" data-val="1500" data-label="전세 / 반전세 (보증금 1억 이하)">
+            <div>
+              <span>전세 / 반전세 (보증금 1억 이하)</span>
+              <span class="opt-sub">지역별 최우선변제금 공제 후 초과분만 반영</span>
+            </div>
+            <span class="check-dot"></span>
+          </button>
+          <button type="button" class="opt-btn" data-val="4500" data-label="고액 전세 (보증금 1억 초과)">
+            <div>
+              <span>고액 전세 (보증금 1억 초과)</span>
+              <span class="opt-sub">공제 한도 초과 보증금이 청산가치에 합산됨</span>
+            </div>
+            <span class="check-dot"></span>
+          </button>
+          <button type="button" class="opt-btn" data-val="6000" data-label="본인 명의 자가 (아파트·빌라 등)">
+            <div>
+              <span>본인 명의 자가 (아파트·빌라 등)</span>
+              <span class="opt-sub">시세에서 주택담보대출 잔액을 뺀 순가치 반영</span>
+            </div>
+            <span class="check-dot"></span>
+          </button>
         </div>
-        <div class="nav-btns"><button type="button" class="btn-prev" onclick="goStep(3)">이전</button><button type="button" class="btn-next" id="next4" disabled onclick="goStep(5)">다음 단계</button></div>
+        <div class="nav-btns">
+          <button type="button" class="btn-prev" onclick="goStep(3)">이전</button>
+          <button type="button" class="btn-next" id="next4" disabled onclick="goStep(5)">다음 단계</button>
+        </div>
       </div>
+
       <div class="step" id="step5">
         <span class="step-tag">5단계 · 차량 및 기타 재산</span>
         <h1>본인 명의 차량이나<br>보유 재산이 있나요?</h1>
         <p class="desc">할부·근저당이 남아 있는 차량은 시세에서 대출 잔액을 빼고 계산합니다</p>
         <div class="option-grid" data-key="asset">
-          <button type="button" class="opt-btn" data-val="0" data-label="차량·재산 없음 (또는 할부잔액 > 시세)"><div><span>차량·재산 없음 (또는 할부잔액 > 시세)</span><span class="opt-sub">순재산가치 0원으로 소득 기준 변제금만 산정</span></div><span class="check-dot"></span></button>
-          <button type="button" class="opt-btn" data-val="1200" data-label="중고차 보유 (순가치 1,500만 원 이하)"><div><span>차량 보유 (순가치 1,500만 원 이하)</span><span class="opt-sub">차량 처분 없이 청산가치 분할 반영 가능</span></div><span class="check-dot"></span></button>
-          <button type="button" class="opt-btn" data-val="3000" data-label="고액 차량 / 예금·보험환급금 등 보유"><div><span>고액 차량 / 예금·보험환급금 등 보유</span><span class="opt-sub">순재산 총액 이상 변제 조건(청산가치 보장) 적용</span></div><span class="check-dot"></span></button>
+          <button type="button" class="opt-btn" data-val="0" data-label="차량·재산 없음 (또는 할부잔액 > 시세)">
+            <div>
+              <span>차량·재산 없음 (또는 할부잔액 > 시세)</span>
+              <span class="opt-sub">순재산가치 0원으로 소득 기준 변제금만 산정</span>
+            </div>
+            <span class="check-dot"></span>
+          </button>
+          <button type="button" class="opt-btn" data-val="1200" data-label="중고차 보유 (순가치 1,500만 원 이하)">
+            <div>
+              <span>차량 보유 (순가치 1,500만 원 이하)</span>
+              <span class="opt-sub">차량 처분 없이 청산가치 분할 반영 가능</span>
+            </div>
+            <span class="check-dot"></span>
+          </button>
+          <button type="button" class="opt-btn" data-val="3000" data-label="고액 차량 / 예금·보험환급금 등 보유">
+            <div>
+              <span>고액 차량 / 예금·보험환급금 등 보유</span>
+              <span class="opt-sub">순재산 총액 이상 변제 조건(청산가치 보장) 적용</span>
+            </div>
+            <span class="check-dot"></span>
+          </button>
         </div>
-        <div class="nav-btns"><button type="button" class="btn-prev" onclick="goStep(4)">이전</button><button type="button" class="btn-next" id="next5" disabled onclick="startLoadingResult()">진단 결과 확인하기</button></div>
+        <div class="nav-btns">
+          <button type="button" class="btn-prev" onclick="goStep(4)">이전</button>
+          <button type="button" class="btn-next" id="next5" disabled onclick="startLoadingResult()">진단 결과 확인하기</button>
+        </div>
       </div>
+
       <div class="loading-screen" id="loadingScreen">
-        <div class="gif-circle"><img src="./이룸 로고.gif" alt="이룸법률사무소 분석 중" /></div>
+        <div class="gif-circle">
+          <img src="./이룸 로고.gif" alt="이룸법률사무소 분석 중" />
+        </div>
         <h2 class="loading-title">예상 변제금을 산출하고 있습니다</h2>
         <p class="loading-sub">생계비 공제와 청산가치 기준을 반영하는 중입니다...</p>
       </div>
+
       <div class="step" id="stepResult">
         <div class="result-box">
           <div class="result-badge" id="recoProcedure">개인회생 유력 검토 대상</div>
           <div class="result-main-label">예상 월 변제금 범위 (36개월 기준)</div>
           <div class="result-main-val" id="estMonthly">월 00만 원 ~ 00만 원</div>
           <div class="result-grid">
-            <div><div class="r-item-label">예상 원금 탕감률</div><div class="r-item-val" id="estWriteOff">약 00%</div></div>
-            <div><div class="r-item-label">청산가치 반영 여부</div><div class="r-item-val" id="assetImpact">소득 기준 산정</div></div>
+            <div>
+              <div class="r-item-label">예상 원금 탕감률</div>
+              <div class="r-item-val" id="estWriteOff">약 00%</div>
+            </div>
+            <div>
+              <div class="r-item-label">청산가치 반영 여부</div>
+              <div class="r-item-val" id="assetImpact">소득 기준 산정</div>
+            </div>
           </div>
         </div>
+
         <div class="summary-card">
           <div class="summary-title">선택하신 조건 요약</div>
           <ul class="summary-list">
@@ -184,8 +708,16 @@
             <li><span>차량·재산</span><span id="sumAsset">-</span></li>
           </ul>
         </div>
-        <div class="point-box" id="pointGuide"><strong>핵심 검토 포인트</strong><span id="pointText"></span></div>
-        <div class="notice-box">※ 본 화면은 별도 개인정보 수집 없이 조건을 비교해 보는 <strong>참고용 모의 계산 결과</strong>입니다. 실제 법원 인가 변제금은 주택담보·차량 할부 잔액, 지역별 임대차 공제액, 최근 대출 사용처에 따라 달라질 수 있습니다.</div>
+
+        <div class="point-box" id="pointGuide">
+          <strong>핵심 검토 포인트</strong>
+          <span id="pointText"></span>
+        </div>
+
+        <div class="notice-box">
+          ※ 본 화면은 별도 개인정보 수집 없이 조건을 비교해 보는 <strong>참고용 모의 계산 결과</strong>입니다. 실제 법원 인가 변제금은 주택담보·차량 할부 잔액, 지역별 임대차 공제액, 최근 대출 사용처에 따라 달라질 수 있습니다.
+        </div>
+
         <div class="action-stack">
           <button type="button" class="btn-kakao" onclick="closeOrBackToChat()">카카오 채팅방으로 돌아가 상담하기</button>
           <a href="tel:15330560" class="btn-call">전담 실무자 직통 전화 (1533-0560)</a>
@@ -193,28 +725,47 @@
         </div>
       </div>
     </div>
-    <div class="footer">이룸법률사무소 · 100% 비밀보장 · 1533-0560</div>
+
+    <div class="footer">
+      이룸법률사무소 · 100% 비밀보장 · 1533-0560
+    </div>
   </div>
+
   <script>
-    const state = { debt: null, debtLabel: "", income: null, incomeLabel: "", family: null, familyLabel: "", housing: null, housingLabel: "", asset: null, assetLabel: "" };
-    document.querySelectorAll(".option-grid").forEach(grid => {
+    const state = {
+      debt: null, debtLabel: "",
+      income: null, incomeLabel: "",
+      family: null, familyLabel: "",
+      housing: null, housingLabel: "",
+      asset: null, assetLabel: ""
+    };
+
+    document.querySelectorAll(".option-grid").forEach(function(grid) {
       const key = grid.dataset.key;
       const stepNum = grid.closest(".step").id.replace("step", "");
       const nextBtn = document.getElementById("next" + stepNum);
-      grid.querySelectorAll(".opt-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-          grid.querySelectorAll(".opt-btn").forEach(b => b.classList.remove("selected"));
+
+      grid.querySelectorAll(".opt-btn").forEach(function(btn) {
+        btn.addEventListener("click", function() {
+          grid.querySelectorAll(".opt-btn").forEach(function(b) {
+            b.classList.remove("selected");
+          });
           btn.classList.add("selected");
+
           state[key] = Number(btn.dataset.val);
           state[key + "Label"] = btn.dataset.label;
           if (nextBtn) nextBtn.disabled = false;
         });
       });
     });
+
     function goStep(num) {
-      document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+      document.querySelectorAll(".step").forEach(function(s) {
+        s.classList.remove("active");
+      });
       document.getElementById("loadingScreen").classList.remove("active");
       document.getElementById("step" + num).classList.add("active");
+
       const pct = num * 20;
       document.getElementById("progressWrap").style.display = "block";
       document.getElementById("stepIndicator").textContent = num + " / 5 단계";
@@ -222,19 +773,31 @@
       document.getElementById("progressFill").style.width = pct + "%";
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
+
     function startLoadingResult() {
-      document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+      document.querySelectorAll(".step").forEach(function(s) {
+        s.classList.remove("active");
+      });
       document.getElementById("progressWrap").style.display = "none";
       document.getElementById("loadingScreen").classList.add("active");
       window.scrollTo({ top: 0, behavior: "smooth" });
-      setTimeout(() => { document.getElementById("loadingScreen").classList.remove("active"); showResult(); }, 1250);
+
+      setTimeout(function() {
+        document.getElementById("loadingScreen").classList.remove("active");
+        showResult();
+      }, 1250);
     }
+
     function showResult() {
       const livingCostMap = { 1: 148, 2: 245, 3: 315, 4: 380 };
       const livingCost = livingCostMap[state.family] || 148;
       const totalNetAsset = (state.housing || 0) + (state.asset || 0);
       const minMonthlyByAsset = Math.ceil(totalNetAsset / 36);
-      let procedureText = "개인회생 유력 검토 대상", lowMan = 0, highMan = 0;
+
+      let procedureText = "개인회생 유력 검토 대상";
+      let lowMan = 0;
+      let highMan = 0;
+
       if (state.income === 0) {
         if (totalNetAsset > 1500) {
           procedureText = "재산 정리 또는 소득 확보 후 회생 검토";
@@ -250,18 +813,30 @@
         lowMan = Math.max(15, Math.round((effectiveBase * 0.85) / 5) * 5);
         highMan = Math.max(lowMan + 15, Math.round((effectiveBase * 1.15) / 5) * 5);
       }
+
       const debtMan = state.debt || 5000;
       const maxRepayTotal = highMan * 36;
-      const writeOffPct = (lowMan === 0 && highMan === 0) ? 0 : Math.min(90, Math.max(15, Math.round(((debtMan - maxRepayTotal) / debtMan) * 100)));
+      const writeOffPct = (lowMan === 0 && highMan === 0)
+        ? 0
+        : Math.min(90, Math.max(15, Math.round(((debtMan - maxRepayTotal) / debtMan) * 100)));
+
       document.getElementById("recoProcedure").textContent = procedureText;
-      document.getElementById("estMonthly").textContent = (lowMan === 0 && highMan === 0) ? "월 변제금 없음 (파산 검토)" : "월 " + lowMan + "만 원 ~ " + highMan + "만 원";
-      document.getElementById("estWriteOff").textContent = (lowMan === 0 && highMan === 0) ? "면책 절차 검토" : "약 " + writeOffPct + "% (참고용)";
-      document.getElementById("assetImpact").textContent = totalNetAsset > 0 ? "청산가치 상향 반영" : "소득 기준 산정";
+      document.getElementById("estMonthly").textContent = (lowMan === 0 && highMan === 0)
+        ? "월 변제금 없음 (파산 검토)"
+        : "월 " + lowMan + "만 원 ~ " + highMan + "만 원";
+      document.getElementById("estWriteOff").textContent = (lowMan === 0 && highMan === 0)
+        ? "면책 절차 검토"
+        : "약 " + writeOffPct + "% (참고용)";
+      document.getElementById("assetImpact").textContent = totalNetAsset > 0
+        ? "청산가치 상향 반영"
+        : "소득 기준 산정";
+
       document.getElementById("sumDebt").textContent = state.debtLabel;
       document.getElementById("sumIncome").textContent = state.incomeLabel;
       document.getElementById("sumFamily").textContent = state.familyLabel;
       document.getElementById("sumHousing").textContent = state.housingLabel;
       document.getElementById("sumAsset").textContent = state.assetLabel;
+
       let guide = "";
       if (state.housing >= 4500 || state.asset >= 1200) {
         guide = "자가 지분·고액 보증금 또는 차량 순가치가 있으면 '청산가치 보장의 원칙'에 따라 총 변제금이 보유 순재산 이상으로 산정됩니다. 담보대출·할부 잔액을 정확히 공제하면 월 변제금을 더 낮출 수 있습니다.";
@@ -271,24 +846,28 @@
         guide = "보유 재산 부담이 크지 않아 월 소득에서 부양가족 생계비(추가 생계비 포함)를 공제한 가용소득 기준으로 변제금이 결정됩니다. 월세·의료비·교육비 추가 공제 여부에 따라 변제금은 더 줄어들 수 있습니다.";
       }
       document.getElementById("pointText").textContent = guide;
+
       document.getElementById("stepResult").classList.add("active");
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
+
     function closeOrBackToChat() {
       window.close();
-      setTimeout(() => { alert("상단 닫기(X)를 누르시면 바로 이룸법률사무소 채팅방으로 돌아갑니다. 채팅창에 통화 가능 시간을 남겨주세요!"); }, 200);
+      setTimeout(function() {
+        alert("상단 닫기(X)를 누르시면 바로 이룸법률사무소 채팅방으로 돌아갑니다. 채팅창에 통화 가능 시간을 남겨주세요!");
+      }, 200);
     }
+
     function resetDiag() {
-      document.querySelectorAll(".opt-btn").forEach(b => b.classList.remove("selected"));
-      for (let i = 1; i <= 5; i++) { const btn = document.getElementById("next" + i); if (btn) btn.disabled = true; }
+      document.querySelectorAll(".opt-btn").forEach(function(b) {
+        b.classList.remove("selected");
+      });
+      for (let i = 1; i <= 5; i++) {
+        const btn = document.getElementById("next" + i);
+        if (btn) btn.disabled = true;
+      }
       goStep(1);
     }
-  <\/script>
+  </script>
 </body>
-</html>`;
-const blob=new Blob([html],{type:"text/html;charset=utf-8"});
-const url=URL.createObjectURL(blob);
-const a=document.createElement("a");
-a.href=url;a.download="index.html";
-document.body.appendChild(a);a.click();a.remove();
-setTimeout(()=>URL.revokeObjectURL(url),1000);})();
+</html>
