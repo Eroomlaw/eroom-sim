@@ -719,7 +719,7 @@
         </div>
 
         <div class="action-stack">
-          <button type="button" class="btn-kakao" onclick="closeOrBackToChat()">카카오 채팅방으로 돌아가 상담하기</button>
+          <a id="kakaoChatBtn" href="http://pf.kakao.com/_xlTcbxj/chat" target="_blank" rel="noopener noreferrer" class="btn-kakao">카카오톡 채널 1:1 상담하기</a>
           <a href="tel:15330560" class="btn-call">전담 실무자 직통 전화 (1533-0560)</a>
           <button type="button" class="btn-prev" onclick="resetDiag()">조건 바꿔서 다시 계산하기</button>
         </div>
@@ -732,6 +732,9 @@
   </div>
 
   <script>
+    const KAKAO_CHAT_URL = "http://pf.kakao.com/_xlTcbxj/chat";
+    document.getElementById("kakaoChatBtn").href = KAKAO_CHAT_URL;
+
     const state = {
       debt: null, debtLabel: "",
       income: null, incomeLabel: "",
@@ -849,13 +852,6 @@
 
       document.getElementById("stepResult").classList.add("active");
       window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function closeOrBackToChat() {
-      window.close();
-      setTimeout(function() {
-        alert("상단 닫기(X)를 누르시면 바로 이룸법률사무소 채팅방으로 돌아갑니다. 채팅창에 통화 가능 시간을 남겨주세요!");
-      }, 200);
     }
 
     function resetDiag() {
